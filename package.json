@@ -1,0 +1,20 @@
+{ "name"            : "permessage-deflate"
+, "description"     : "Per-message DEFLATE compression extension for websocket-driver"
+, "homepage"        : "http://github.com/faye/permessage-deflate-node"
+, "author"          : "James Coglan <jcoglan@gmail.com> (http://jcoglan.com/)"
+, "keywords"        : ["websocket", "compression", "deflate"]
+, "license"         : "MIT"
+
+, "version"         : "0.1.0"
+, "engines"         : {"node": ">=0.6.0"}
+, "main"            : "./lib/permessage_deflate"
+, "devDependencies" : {"jstest": ""}
+
+, "scripts"         : {"test": "jstest spec/runner.js"}
+
+, "repository"      : { "type"  : "git"
+                      , "url"   : "git://github.com/faye/permessage-deflate-node.git"
+                      }
+
+, "bugs"            : "http://github.com/faye/permessage-deflate-node/issues"
+}
