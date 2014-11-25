@@ -3,33 +3,13 @@
 Provides support for the
 [permessage-deflate](https://tools.ietf.org/html/draft-ietf-hybi-permessage-compression)
 extension to the WebSocket protocol, as a plugin to the
-[websocket-driver](https://github.com/faye/websocket-driver-node) library.
+[websocket-extensions](https://github.com/faye/websocket-extensions-node) library.
 
 
 ## Installation
 
 ```
 $ npm install permessage-deflate
-```
-
-
-## Usage
-
-To enable support for the extension on a server-side driver:
-
-```js
-var websocket = require('websocket-driver'),
-    deflate   = require('permessage-deflate'),
-    http      = require('http');
-
-var server = http.createServer();
-
-server.on('upgrade', function(request, socket, body) {
-  var driver = websocket.http(request);
-  driver.addExtension(deflate);
-
-  // proceed as normal
-});
 ```
 
 

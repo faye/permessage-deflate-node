@@ -1,5 +1,5 @@
 { "name"            : "permessage-deflate"
-, "description"     : "Per-message DEFLATE compression extension for websocket-driver"
+, "description"     : "Per-message DEFLATE compression extension for WebSocket connections"
 , "homepage"        : "http://github.com/faye/permessage-deflate-node"
 , "author"          : "James Coglan <jcoglan@gmail.com> (http://jcoglan.com/)"
 , "keywords"        : ["websocket", "compression", "deflate"]
