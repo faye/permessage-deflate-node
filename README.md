@@ -1,10 +1,9 @@
-# permessage-deflate
+# permessage-deflate [![Build status](https://secure.travis-ci.org/faye/permessage-deflate-node.svg)](http://travis-ci.org/faye/permessage-deflate-node)
 
-Provides support for the
+Implements the
 [permessage-deflate](https://tools.ietf.org/html/draft-ietf-hybi-permessage-compression)
-extension to the WebSocket protocol, as a plugin to the
-[websocket-extensions](https://github.com/faye/websocket-extensions-node) library.
-
+WebSocket protocol extension as a plugin for
+[websocket-extensions](https://github.com/faye/websocket-extensions-node).
 
 ## Installation
 
@@ -12,6 +11,40 @@ extension to the WebSocket protocol, as a plugin to the
 $ npm install permessage-deflate
 ```
 
+## Usage
+
+Add the plugin to your extensions:
+
+```js
+var Extensions = require('websocket-extensions'),
+    deflate    = require('permessage-deflate');
+
+var exts = new Extensions();
+exts.add(deflate);
+```
+
+The extension can be configured, for example:
+
+```js
+var Extensions = require('websocket-extensions'),
+    deflate    = require('permessage-deflate');
+
+deflate = deflate.configure({noContextTakeover: true});
+
+var exts = new Extensions();
+exts.add(deflate);
+```
+
+Supported options are:
+
+* `noContextTakeover`: if `true`, stops the session reusing a deflate context
+  between messages
+* `requestNoContextTakeover`: if `true`, makes the session tell the other peer
+  not to reuse a deflate context between messages
+* `maxWindowBits`: an integer from `8` to `15` inclusive that sets the size of
+  the session's sliding window
+* `requestMaxWindowBits`: an integer from `8` to `15` inclusive to ask the other
+  peer to use to set its sliding window size, if supported
 
 ## License
 
