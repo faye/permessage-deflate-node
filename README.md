@@ -41,12 +41,12 @@ exts.add(deflate);
 
 The set of available options can be split into two sets: those that control the
 session's compressor for outgoing messages and do not need to be communicated to
-the peer, and those that are negoatiated as part of the protocol. The settings
+the peer, and those that are negotiated as part of the protocol. The settings
 only affecting the compressor are described fully in the [zlib
 documentation](http://nodejs.org/api/zlib.html#zlib_options):
 
 * `level`: sets the compression level, can be an integer from `0` to `9`, or one
-  of the contants `zlib.Z_NO_COMPRESSION`, `zlib.Z_BEST_SPEED`,
+  of the constants `zlib.Z_NO_COMPRESSION`, `zlib.Z_BEST_SPEED`,
   `zlib.Z_BEST_COMPRESSION`, or `zlib.Z_DEFAULT_COMPRESSION`
 * `memLevel`: sets how much memory the compressor allocates, can be an integer
   from `1` to `9`, or one of the constants `zlib.Z_MIN_MEMLEVEL`,
