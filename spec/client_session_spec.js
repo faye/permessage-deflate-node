@@ -9,6 +9,7 @@ test.describe("ClientSession", function() { with(this) {
 
     this.deflate  = zlibMock()
     this.inflate  = zlibMock()
+    this.flush    = zlib.Z_SYNC_FLUSH
     this.level    = zlib.Z_DEFAULT_LEVEL
     this.memLevel = zlib.Z_DEFAULT_MEMLEVEL
     this.strategy = zlib.Z_DEFAULT_STRATEGY
@@ -70,7 +71,7 @@ test.describe("ClientSession", function() { with(this) {
 
       it("uses context takeover and 15 window bits for deflating outgoing messages", function() { with(this) {
         activate()
-        expect(zlib, "createDeflateRaw").given({windowBits: 15, level: level, memLevel: memLevel, strategy: strategy}).exactly(1).returning(deflate)
+        expect(zlib, "createDeflateRaw").given({flush: flush, windowBits: 15, level: level, memLevel: memLevel, strategy: strategy}).exactly(1).returning(deflate)
         processOutgoingMessage()
         processOutgoingMessage()
       }})
@@ -101,7 +102,7 @@ test.describe("ClientSession", function() { with(this) {
 
       it("uses no context takeover and 15 window bits to deflate outgoing messages", function() { with(this) {
         activate()
-        expect(zlib, "createDeflateRaw").given({windowBits: 15, level: level, memLevel: memLevel, strategy: strategy}).exactly(2).returning(deflate)
+        expect(zlib, "createDeflateRaw").given({flush: flush, windowBits: 15, level: level, memLevel: memLevel, strategy: strategy}).exactly(2).returning(deflate)
         expect(deflate, "close").exactly(2)
         processOutgoingMessage()
         processOutgoingMessage()
@@ -140,7 +141,7 @@ test.describe("ClientSession", function() { with(this) {
 
       it("uses context takeover and 8 window bits for deflating outgoing messages", function() { with(this) {
         activate()
-        expect(zlib, "createDeflateRaw").given({windowBits: 8, level: level, memLevel: memLevel, strategy: strategy}).exactly(1).returning(deflate)
+        expect(zlib, "createDeflateRaw").given({flush: flush, windowBits: 8, level: level, memLevel: memLevel, strategy: strategy}).exactly(1).returning(deflate)
         processOutgoingMessage()
         processOutgoingMessage()
       }})
@@ -169,7 +170,7 @@ test.describe("ClientSession", function() { with(this) {
 
       it("uses no context takeover and 15 window bits for deflating outgoing messages", function() { with(this) {
         activate()
-        expect(zlib, "createDeflateRaw").given({windowBits: 15, level: level, memLevel: memLevel, strategy: strategy}).exactly(2).returning(deflate)
+        expect(zlib, "createDeflateRaw").given({flush: flush, windowBits: 15, level: level, memLevel: memLevel, strategy: strategy}).exactly(2).returning(deflate)
         expect(deflate, "close").exactly(2)
         processOutgoingMessage()
         processOutgoingMessage()
@@ -191,7 +192,7 @@ test.describe("ClientSession", function() { with(this) {
 
       it("uses context takeover and 9 window bits for deflating outgoing messages", function() { with(this) {
         activate()
-        expect(zlib, "createDeflateRaw").given({windowBits: 9, level: level, memLevel: memLevel, strategy: strategy}).exactly(1).returning(deflate)
+        expect(zlib, "createDeflateRaw").given({flush: flush, windowBits: 9, level: level, memLevel: memLevel, strategy: strategy}).exactly(1).returning(deflate)
         processOutgoingMessage()
         processOutgoingMessage()
       }})
@@ -214,7 +215,7 @@ test.describe("ClientSession", function() { with(this) {
 
       it("uses context takeover and 8 window bits for deflating outgoing messages", function() { with(this) {
         activate()
-        expect(zlib, "createDeflateRaw").given({windowBits: 8, level: level, memLevel: memLevel, strategy: strategy}).exactly(1).returning(deflate)
+        expect(zlib, "createDeflateRaw").given({flush: flush, windowBits: 8, level: level, memLevel: memLevel, strategy: strategy}).exactly(1).returning(deflate)
         processOutgoingMessage()
         processOutgoingMessage()
       }})
@@ -309,7 +310,7 @@ test.describe("ClientSession", function() { with(this) {
 
     it("sets the level of the deflate stream", function() { with(this) {
       activate()
-      expect(zlib, "createDeflateRaw").given({windowBits: 15, level: zlib.Z_BEST_SPEED, memLevel: memLevel, strategy: strategy}).returns(deflate)
+      expect(zlib, "createDeflateRaw").given({flush: flush, windowBits: 15, level: zlib.Z_BEST_SPEED, memLevel: memLevel, strategy: strategy}).returns(deflate)
       processOutgoingMessage()
     }})
   }})
@@ -319,7 +320,7 @@ test.describe("ClientSession", function() { with(this) {
 
     it("sets the memLevel of the deflate stream", function() { with(this) {
       activate()
-      expect(zlib, "createDeflateRaw").given({windowBits: 15, level: zlib.Z_DEFAULT_LEVEL, memLevel: 5, strategy: strategy}).returns(deflate)
+      expect(zlib, "createDeflateRaw").given({flush: flush, windowBits: 15, level: zlib.Z_DEFAULT_LEVEL, memLevel: 5, strategy: strategy}).returns(deflate)
       processOutgoingMessage()
     }})
   }})
@@ -329,7 +330,7 @@ test.describe("ClientSession", function() { with(this) {
 
     it("sets the strategy of the deflate stream", function() { with(this) {
       activate()
-      expect(zlib, "createDeflateRaw").given({windowBits: 15, level: zlib.Z_DEFAULT_LEVEL, memLevel: memLevel, strategy: zlib.Z_FILTERED}).returns(deflate)
+      expect(zlib, "createDeflateRaw").given({flush: flush, windowBits: 15, level: zlib.Z_DEFAULT_LEVEL, memLevel: memLevel, strategy: zlib.Z_FILTERED}).returns(deflate)
       processOutgoingMessage()
     }})
   }})
