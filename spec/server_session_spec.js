@@ -25,7 +25,7 @@ test.describe("ClientSession", function() { with(this) {
     this.stub(stream, "removeListener")
 
     this.stub(stream, "write")
-    this.stub(stream, "flush").yields([])
+    this.stub(stream, "flush", function(cb) { if(cb) cb() });
     this.stub(stream, "close").raises(new Error("unexpected close()"))
 
     return stream
