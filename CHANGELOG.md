@@ -1,3 +1,7 @@
+### 0.1.2 / 2014-12-18
+
+* Don't allow configure() to be called with unrecognized options
+
 ### 0.1.1 / 2014-12-15
 
 * Fix race condition when using context takeover, where adjacent messages have
