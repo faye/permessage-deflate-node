@@ -9,7 +9,7 @@ test.describe("ClientSession", function() { with(this) {
 
     this.deflate  = zlibMock()
     this.inflate  = zlibMock()
-    this.flush    = zlib.Z_SYNC_FLUSH
+    this.flush    = zlib.Z_FULL_FLUSH
     this.level    = zlib.Z_DEFAULT_LEVEL
     this.memLevel = zlib.Z_DEFAULT_MEMLEVEL
     this.strategy = zlib.Z_DEFAULT_STRATEGY
