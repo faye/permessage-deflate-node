@@ -1,3 +1,8 @@
+### 0.1.3 / 2015-04-10
+
+* Fix a race condition causing some fragments of deflate output to be dropped
+* Make sure to emit minimal output on all Node versions
+
 ### 0.1.2 / 2014-12-18
 
 * Don't allow configure() to be called with unrecognized options
