@@ -2,5 +2,6 @@
 .gitignore
 .npmignore
 .travis.yml
+examples
 node_modules
 spec
