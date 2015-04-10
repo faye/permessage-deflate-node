@@ -1,5 +1,3 @@
-'use strict';
-
 import Session from './session';
 import * as common from './common';
 
