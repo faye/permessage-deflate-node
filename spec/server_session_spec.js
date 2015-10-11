@@ -2,7 +2,7 @@ var PermessageDeflate = require('../lib/permessage_deflate'),
     zlib = require('zlib'),
     test = require('jstest').Test
 
-test.describe("ClientSession", function() { with(this) {
+test.describe("ServerSession", function() { with(this) {
   before(function() { with(this) {
     this.ext      = PermessageDeflate.configure(options)
     this.session  = ext.createServerSession([offer])
@@ -183,8 +183,8 @@ test.describe("ClientSession", function() { with(this) {
     define("options", {maxWindowBits: 12})
 
     describe("with an empty offer", function() { with(this) {
-      it("includes server_max_window_bits in the response", function() { with(this) {
-        assertEqual( {server_max_window_bits: 12}, response() )
+      it("does not include server_max_window_bits in the response", function() { with(this) {
+        assertEqual( {}, response() )
       }})
 
       it("uses context takeover and 12 window bits for deflating outgoing messages", function() { with(this) {
