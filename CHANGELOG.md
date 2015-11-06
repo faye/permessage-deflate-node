@@ -1,3 +1,8 @@
+### 0.1.4 / 2015-11-06
+
+* The server does not send `server_max_window_bits` if the client does not ask
+  for it; this works around an issue in Firefox.
+
 ### 0.1.3 / 2015-04-10
 
 * Fix a race condition causing some fragments of deflate output to be dropped
