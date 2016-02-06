@@ -81,6 +81,12 @@ test.describe("ServerSession", function() { with(this) {
         processOutgoingMessage()
         processOutgoingMessage()
       }})
+
+      it("catches errors thrown by zlib", function() { with(this) {
+        response()
+        stub(zlib, "createDeflateRaw").returning(deflate)
+        assertNothingThrown(function() { processOutgoingMessage() })
+      }})
     }})
 
     describe("when the offer includes client_no_context_takeover", function() { with(this) {
@@ -96,6 +102,12 @@ test.describe("ServerSession", function() { with(this) {
         expect(inflate, "close").exactly(2)
         processIncomingMessage()
         processIncomingMessage()
+      }})
+
+      it("catches errors thrown by zlib", function() { with(this) {
+        response()
+        stub(zlib, "createInflateRaw").returning(inflate)
+        assertNothingThrown(function() { processIncomingMessage() })
       }})
     }})
 

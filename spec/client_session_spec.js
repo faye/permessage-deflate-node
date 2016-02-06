@@ -90,6 +90,12 @@ test.describe("ClientSession", function() { with(this) {
         processIncomingMessage()
         processIncomingMessage()
       }})
+
+      it("catches errors thrown by zlib", function() { with(this) {
+        activate()
+        stub(zlib, "createInflateRaw").returning(inflate)
+        assertNothingThrown(function() { processIncomingMessage() })
+      }})
     }})
 
     describe("when the response includes client_no_context_takeover", function() { with(this) {
@@ -105,6 +111,12 @@ test.describe("ClientSession", function() { with(this) {
         expect(deflate, "close").exactly(2)
         processOutgoingMessage()
         processOutgoingMessage()
+      }})
+
+      it("catches errors thrown by zlib", function() { with(this) {
+        activate()
+        stub(zlib, "createDeflateRaw").returning(deflate)
+        assertNothingThrown(function() { processOutgoingMessage() })
       }})
     }})
 
