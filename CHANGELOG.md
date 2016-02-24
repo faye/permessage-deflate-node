@@ -1,3 +1,7 @@
+### 0.1.5 / 2016-02-24
+
+* Catch errors thrown by `close()` on zlib streams
+
 ### 0.1.4 / 2015-11-06
 
 * The server does not send `server_max_window_bits` if the client does not ask
