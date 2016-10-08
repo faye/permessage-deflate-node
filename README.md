@@ -11,7 +11,7 @@ WebSocket protocol extension as a plugin for
 $ npm install permessage-deflate
 ```
 
-## Usage
+## Usage
 
 Add the plugin to your extensions:
 
