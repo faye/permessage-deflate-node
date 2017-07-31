@@ -6,11 +6,12 @@
 , "license"         : "MIT"
 
 , "version"         : "0.1.5"
-, "engines"         : {"node": ">=0.8.0"}
+, "engines"         : { "node": ">=0.8.0" }
 , "main"            : "./lib/permessage_deflate"
-, "devDependencies" : {"jstest": ""}
 
-, "scripts"         : {"test": "jstest spec/runner.js"}
+, "devDependencies" : { "jstest": "*" }
+
+, "scripts"         : { "test": "jstest spec/runner.js" }
 
 , "repository"      : { "type"  : "git"
                       , "url"   : "git://github.com/faye/permessage-deflate-node.git"
