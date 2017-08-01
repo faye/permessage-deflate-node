@@ -1,17 +1,18 @@
 var PermessageDeflate = require('../lib/permessage_deflate'),
-    zlib = require('zlib'),
+    _zlib = require('zlib'),
     test = require('jstest').Test
 
 test.describe("ServerSession", function() { with(this) {
   before(function() { with(this) {
-    this.ext      = PermessageDeflate.configure(options)
-    this.session  = ext.createServerSession([offer])
-
     this.deflate  = zlibMock()
     this.inflate  = zlibMock()
-    this.level    = zlib.Z_DEFAULT_LEVEL
-    this.memLevel = zlib.Z_DEFAULT_MEMLEVEL
-    this.strategy = zlib.Z_DEFAULT_STRATEGY
+    this.level    = _zlib.Z_DEFAULT_LEVEL
+    this.memLevel = _zlib.Z_DEFAULT_MEMLEVEL
+    this.strategy = _zlib.Z_DEFAULT_STRATEGY
+
+    this.ext      = PermessageDeflate.configure(options)
+    this.zlib     = {}
+    this.session  = ext.configure({zlib: zlib}).createServerSession([offer])
 
     this.message  = {data: "hello", rsv1: true}
   }})
@@ -319,11 +320,11 @@ test.describe("ServerSession", function() { with(this) {
   }})
 
   describe("with level", function() { with(this) {
-    define("options", {level: zlib.Z_BEST_SPEED})
+    define("options", {level: _zlib.Z_BEST_SPEED})
 
     it("sets the level of the deflate stream", function() { with(this) {
       response()
-      expect(zlib, "createDeflateRaw").given({windowBits: 15, level: zlib.Z_BEST_SPEED, memLevel: memLevel, strategy: strategy}).returns(deflate)
+      expect(zlib, "createDeflateRaw").given({windowBits: 15, level: _zlib.Z_BEST_SPEED, memLevel: memLevel, strategy: strategy}).returns(deflate)
       processOutgoingMessage()
     }})
   }})
@@ -333,17 +334,17 @@ test.describe("ServerSession", function() { with(this) {
 
     it("sets the memLevel of the deflate stream", function() { with(this) {
       response()
-      expect(zlib, "createDeflateRaw").given({windowBits: 15, level: zlib.Z_DEFAULT_LEVEL, memLevel: 5, strategy: strategy}).returns(deflate)
+      expect(zlib, "createDeflateRaw").given({windowBits: 15, level: _zlib.Z_DEFAULT_LEVEL, memLevel: 5, strategy: strategy}).returns(deflate)
       processOutgoingMessage()
     }})
   }})
 
   describe("with strategy", function() { with(this) {
-    define("options", {strategy: zlib.Z_FILTERED})
+    define("options", {strategy: _zlib.Z_FILTERED})
 
     it("sets the strategy of the deflate stream", function() { with(this) {
       response()
-      expect(zlib, "createDeflateRaw").given({windowBits: 15, level: zlib.Z_DEFAULT_LEVEL, memLevel: memLevel, strategy: zlib.Z_FILTERED}).returns(deflate)
+      expect(zlib, "createDeflateRaw").given({windowBits: 15, level: _zlib.Z_DEFAULT_LEVEL, memLevel: memLevel, strategy: _zlib.Z_FILTERED}).returns(deflate)
       processOutgoingMessage()
     }})
   }})
