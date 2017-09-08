@@ -128,9 +128,9 @@ test.describe("ClientSession", function() { with(this) {
         assertEqual( true, activate() )
       }})
 
-      it("uses context takeover and 8 window bits for inflating incoming messages", function() { with(this) {
+      it("uses context takeover and 9 window bits for inflating incoming messages", function() { with(this) {
         activate()
-        expect(zlib, "createInflateRaw").given({windowBits: 8}).exactly(1).returning(inflate)
+        expect(zlib, "createInflateRaw").given({windowBits: 9}).exactly(1).returning(inflate)
         processIncomingMessage()
         processIncomingMessage()
       }})
@@ -151,9 +151,9 @@ test.describe("ClientSession", function() { with(this) {
         assertEqual( true, activate() )
       }})
 
-      it("uses context takeover and 8 window bits for deflating outgoing messages", function() { with(this) {
+      it("uses context takeover and 9 window bits for deflating outgoing messages", function() { with(this) {
         activate()
-        expect(zlib, "createDeflateRaw").given({windowBits: 8, level: level, memLevel: memLevel, strategy: strategy}).exactly(1).returning(deflate)
+        expect(zlib, "createDeflateRaw").given({windowBits: 9, level: level, memLevel: memLevel, strategy: strategy}).exactly(1).returning(deflate)
         processOutgoingMessage()
         processOutgoingMessage()
       }})
@@ -225,9 +225,9 @@ test.describe("ClientSession", function() { with(this) {
         assertEqual( true, activate() )
       }})
 
-      it("uses context takeover and 8 window bits for deflating outgoing messages", function() { with(this) {
+      it("uses context takeover and 9 window bits for deflating outgoing messages", function() { with(this) {
         activate()
-        expect(zlib, "createDeflateRaw").given({windowBits: 8, level: level, memLevel: memLevel, strategy: strategy}).exactly(1).returning(deflate)
+        expect(zlib, "createDeflateRaw").given({windowBits: 9, level: level, memLevel: memLevel, strategy: strategy}).exactly(1).returning(deflate)
         processOutgoingMessage()
         processOutgoingMessage()
       }})
