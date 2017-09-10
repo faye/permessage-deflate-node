@@ -1,3 +1,8 @@
+### 0.1.6 / 2017-09-10
+
+* Use `9` instead of `8` as the `windowBits` parameter to zlib, to deal with
+  restrictions introduced in zlib v1.2.9
+
 ### 0.1.5 / 2016-02-24
 
 * Catch errors thrown by `close()` on zlib streams
