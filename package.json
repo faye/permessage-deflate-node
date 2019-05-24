@@ -3,7 +3,7 @@
 , "homepage"        : "https://github.com/faye/permessage-deflate-node"
 , "author"          : "James Coglan <jcoglan@gmail.com> (http://jcoglan.com/)"
 , "keywords"        : ["websocket", "compression", "deflate"]
-, "license"         : "MIT"
+, "license"         : "Apache-2.0"
 
 , "version"         : "0.1.6"
 , "engines"         : { "node": ">=0.8.0" }
