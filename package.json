@@ -10,6 +10,7 @@
 , "files"           : ["lib"]
 , "main"            : "./lib/permessage_deflate"
 
+, "dependencies"    : { "safe-buffer": "*" }
 , "devDependencies" : { "jstest": "*" }
 
 , "scripts"         : { "test": "jstest spec/runner.js" }
