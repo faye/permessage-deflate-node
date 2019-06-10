@@ -1,3 +1,8 @@
+### 0.1.7 / 2019-06-10
+
+- Use the `Buffer.alloc()` and `Buffer.from()` functions instead of the unsafe
+  `Buffer()` constructor
+
 ### 0.1.6 / 2017-09-10
 
 - Use `9` instead of `8` as the `windowBits` parameter to zlib, to deal with
