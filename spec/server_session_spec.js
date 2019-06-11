@@ -12,9 +12,9 @@ test.describe("ServerSession", function() { with(this) {
 
     this.ext      = PermessageDeflate.configure(options)
     this.zlib     = {}
-    this.session  = ext.configure({zlib: zlib}).createServerSession([offer])
+    this.session  = ext.configure({ zlib: zlib }).createServerSession([offer])
 
-    this.message  = {data: "hello", rsv1: true}
+    this.message  = { data: "hello", rsv1: true }
   }})
 
   define("zlibMock", function() {
@@ -55,29 +55,29 @@ test.describe("ServerSession", function() { with(this) {
 
       it("uses context takeover and 15 window bits for inflating incoming messages", function() { with(this) {
         response()
-        expect(zlib, "createInflateRaw").given({windowBits: 15}).exactly(1).returning(inflate)
+        expect(zlib, "createInflateRaw").given({ windowBits: 15 }).exactly(1).returning(inflate)
         processIncomingMessage()
         processIncomingMessage()
       }})
 
       it("uses context takeover and 15 window bits for deflating outgoing messages", function() { with(this) {
         response()
-        expect(zlib, "createDeflateRaw").given({windowBits: 15, level: level, memLevel: memLevel, strategy: strategy}).exactly(1).returning(deflate)
+        expect(zlib, "createDeflateRaw").given({ windowBits: 15, level: level, memLevel: memLevel, strategy: strategy }).exactly(1).returning(deflate)
         processOutgoingMessage()
         processOutgoingMessage()
       }})
     }})
 
     describe("when the offer includes server_no_context_takeover", function() { with(this) {
-      define("offer", {server_no_context_takeover: true})
+      define("offer", { server_no_context_takeover: true })
 
       it("includes server_no_context_takeover in the response", function() { with(this) {
-        assertEqual( {server_no_context_takeover: true}, response() )
+        assertEqual( { server_no_context_takeover: true }, response() )
       }})
 
       it("uses no context takeover and 15 window bits for deflating outgoing messages", function() { with(this) {
         response()
-        expect(zlib, "createDeflateRaw").given({windowBits: 15, level: level, memLevel: memLevel, strategy: strategy}).exactly(2).returning(deflate)
+        expect(zlib, "createDeflateRaw").given({ windowBits: 15, level: level, memLevel: memLevel, strategy: strategy }).exactly(2).returning(deflate)
         expect(deflate, "close").exactly(2)
         processOutgoingMessage()
         processOutgoingMessage()
@@ -91,15 +91,15 @@ test.describe("ServerSession", function() { with(this) {
     }})
 
     describe("when the offer includes client_no_context_takeover", function() { with(this) {
-      define("offer", {client_no_context_takeover: true})
+      define("offer", { client_no_context_takeover: true })
 
       it("includes client_no_context_takeover in the response", function() { with(this) {
-        assertEqual( {client_no_context_takeover: true}, response() )
+        assertEqual( { client_no_context_takeover: true }, response() )
       }})
 
       it("uses no context takeover and 15 window bits for inflating incoming messages", function() { with(this) {
         response()
-        expect(zlib, "createInflateRaw").given({windowBits: 15}).exactly(2).returning(inflate)
+        expect(zlib, "createInflateRaw").given({ windowBits: 15 }).exactly(2).returning(inflate)
         expect(inflate, "close").exactly(2)
         processIncomingMessage()
         processIncomingMessage()
@@ -113,22 +113,22 @@ test.describe("ServerSession", function() { with(this) {
     }})
 
     describe("when the offer includes server_max_window_bits", function() { with(this) {
-      define("offer", {server_max_window_bits: 13})
+      define("offer", { server_max_window_bits: 13 })
 
       it("includes server_max_window_bits in the response", function() { with(this) {
-        assertEqual( {server_max_window_bits: 13}, response() )
+        assertEqual( { server_max_window_bits: 13 }, response() )
       }})
 
       it("uses context takeover and 13 window bits for deflating outgoing messages", function() { with(this) {
         response()
-        expect(zlib, "createDeflateRaw").given({windowBits: 13, level: level, memLevel: memLevel, strategy: strategy}).exactly(1).returning(deflate)
+        expect(zlib, "createDeflateRaw").given({ windowBits: 13, level: level, memLevel: memLevel, strategy: strategy }).exactly(1).returning(deflate)
         processOutgoingMessage()
         processOutgoingMessage()
       }})
     }})
 
     describe("when the offer includes invalid server_max_window_bits", function() { with(this) {
-      define("offer", {server_max_window_bits: 20})
+      define("offer", { server_max_window_bits: 20 })
 
       it("does not create a session", function() { with(this) {
         assertEqual( null, session )
@@ -136,7 +136,7 @@ test.describe("ServerSession", function() { with(this) {
     }})
 
     describe("when the offer includes client_max_window_bits", function() { with(this) {
-      define("offer", {client_max_window_bits: true})
+      define("offer", { client_max_window_bits: true })
 
       it("does not include a client_max_window_bits hint in the response", function() { with(this) {
         assertEqual( {}, response() )
@@ -144,29 +144,29 @@ test.describe("ServerSession", function() { with(this) {
 
       it("uses context takeover and 15 window bits for inflating incoming messages", function() { with(this) {
         response()
-        expect(zlib, "createInflateRaw").given({windowBits: 15}).exactly(1).returning(inflate)
+        expect(zlib, "createInflateRaw").given({ windowBits: 15 }).exactly(1).returning(inflate)
         processIncomingMessage()
         processIncomingMessage()
       }})
     }})
 
     describe("when the offer includes a client_max_window_bits hint", function() { with(this) {
-      define("offer", {client_max_window_bits: 13})
+      define("offer", { client_max_window_bits: 13 })
 
       it("includes a client_max_window_bits hint in the response", function() { with(this) {
-        assertEqual( {client_max_window_bits: 13}, response() )
+        assertEqual( { client_max_window_bits: 13 }, response() )
       }})
 
       it("uses context takeover and 13 window bits for inflating incoming messages", function() { with(this) {
         response()
-        expect(zlib, "createInflateRaw").given({windowBits: 13}).exactly(1).returning(inflate)
+        expect(zlib, "createInflateRaw").given({ windowBits: 13 }).exactly(1).returning(inflate)
         processIncomingMessage()
         processIncomingMessage()
       }})
     }})
 
     describe("when the offer includes invalid client_max_window_bits", function() { with(this) {
-      define("offer", {client_max_window_bits: 20})
+      define("offer", { client_max_window_bits: 20 })
 
       it("does not create a session", function() { with(this) {
         assertEqual( null, session )
@@ -175,16 +175,16 @@ test.describe("ServerSession", function() { with(this) {
   }})
 
   describe("with noContextTakeover", function() { with(this) {
-    define("options", {noContextTakeover: true})
+    define("options", { noContextTakeover: true })
 
     describe("with an empty offer", function() { with(this) {
       it("includes server_no_context_takeover in the response", function() { with(this) {
-        assertEqual( {server_no_context_takeover: true}, response() )
+        assertEqual( { server_no_context_takeover: true }, response() )
       }})
 
       it("uses no context takeover and 15 window bits for deflating outgoing messages", function() { with(this) {
         response()
-        expect(zlib, "createDeflateRaw").given({windowBits: 15, level: level, memLevel: memLevel, strategy: strategy}).exactly(2).returning(deflate)
+        expect(zlib, "createDeflateRaw").given({ windowBits: 15, level: level, memLevel: memLevel, strategy: strategy }).exactly(2).returning(deflate)
         expect(deflate, "close").exactly(2)
         processOutgoingMessage()
         processOutgoingMessage()
@@ -193,7 +193,7 @@ test.describe("ServerSession", function() { with(this) {
   }})
 
   describe("with maxWindowBits", function() { with(this) {
-    define("options", {maxWindowBits: 12})
+    define("options", { maxWindowBits: 12 })
 
     describe("with an empty offer", function() { with(this) {
       it("does not include server_max_window_bits in the response", function() { with(this) {
@@ -202,37 +202,37 @@ test.describe("ServerSession", function() { with(this) {
 
       it("uses context takeover and 12 window bits for deflating outgoing messages", function() { with(this) {
         response()
-        expect(zlib, "createDeflateRaw").given({windowBits: 12, level: level, memLevel: memLevel, strategy: strategy}).exactly(1).returning(deflate)
+        expect(zlib, "createDeflateRaw").given({ windowBits: 12, level: level, memLevel: memLevel, strategy: strategy }).exactly(1).returning(deflate)
         processOutgoingMessage()
         processOutgoingMessage()
       }})
     }})
 
     describe("when the offer has higher server_max_window_bits", function() { with(this) {
-      define("offer", {server_max_window_bits: 13})
+      define("offer", { server_max_window_bits: 13 })
 
       it("includes server_max_window_bits in the response", function() { with(this) {
-        assertEqual( {server_max_window_bits: 12}, response() )
+        assertEqual( { server_max_window_bits: 12 }, response() )
       }})
 
       it("uses context takeover and 12 window bits for deflating outgoing messages", function() { with(this) {
         response()
-        expect(zlib, "createDeflateRaw").given({windowBits: 12, level: level, memLevel: memLevel, strategy: strategy}).exactly(1).returning(deflate)
+        expect(zlib, "createDeflateRaw").given({ windowBits: 12, level: level, memLevel: memLevel, strategy: strategy }).exactly(1).returning(deflate)
         processOutgoingMessage()
         processOutgoingMessage()
       }})
     }})
 
     describe("when the offer has lower server_max_window_bits", function() { with(this) {
-      define("offer", {server_max_window_bits: 11})
+      define("offer", { server_max_window_bits: 11 })
 
       it("includes server_max_window_bits in the response", function() { with(this) {
-        assertEqual( {server_max_window_bits: 11}, response() )
+        assertEqual( { server_max_window_bits: 11 }, response() )
       }})
 
       it("uses context takeover and 11 window bits for deflating outgoing messages", function() { with(this) {
         response()
-        expect(zlib, "createDeflateRaw").given({windowBits: 11, level: level, memLevel: memLevel, strategy: strategy}).exactly(1).returning(deflate)
+        expect(zlib, "createDeflateRaw").given({ windowBits: 11, level: level, memLevel: memLevel, strategy: strategy }).exactly(1).returning(deflate)
         processOutgoingMessage()
         processOutgoingMessage()
       }})
@@ -240,16 +240,16 @@ test.describe("ServerSession", function() { with(this) {
   }})
 
   describe("with requestNoContextTakeover", function() { with(this) {
-    define("options", {requestNoContextTakeover: true})
+    define("options", { requestNoContextTakeover: true })
 
     describe("with an empty offer", function() { with(this) {
       it("includes client_no_context_takeover in the response", function() { with(this) {
-        assertEqual( {client_no_context_takeover: true}, response() )
+        assertEqual( { client_no_context_takeover: true }, response() )
       }})
 
       it("uses no context takeover and 15 window bits for inflating incoming messages", function() { with(this) {
         response()
-        expect(zlib, "createInflateRaw").given({windowBits: 15}).exactly(2).returning(inflate)
+        expect(zlib, "createInflateRaw").given({ windowBits: 15 }).exactly(2).returning(inflate)
         expect(inflate, "close").exactly(2)
         processIncomingMessage()
         processIncomingMessage()
@@ -258,7 +258,7 @@ test.describe("ServerSession", function() { with(this) {
   }})
 
   describe("with requestMaxWindowBits", function() { with(this) {
-    define("options", {requestMaxWindowBits: 11})
+    define("options", { requestMaxWindowBits: 11 })
 
     describe("with an empty offer", function() { with(this) {
       it("does not include client_max_window_bits in the response", function() { with(this) {
@@ -267,52 +267,52 @@ test.describe("ServerSession", function() { with(this) {
 
       it("uses context takeover and 15 window bits for inflating incoming messages", function() { with(this) {
         response()
-        expect(zlib, "createInflateRaw").given({windowBits: 15}).exactly(1).returning(inflate)
+        expect(zlib, "createInflateRaw").given({ windowBits: 15 }).exactly(1).returning(inflate)
         processIncomingMessage()
         processIncomingMessage()
       }})
     }})
 
     describe("when the offer includes client_max_window_bits", function() { with(this) {
-      define("offer", {client_max_window_bits: true})
+      define("offer", { client_max_window_bits: true })
 
       it("includes client_max_window_bits in the response", function() { with(this) {
-        assertEqual( {client_max_window_bits: 11}, response() )
+        assertEqual( { client_max_window_bits: 11 }, response() )
       }})
 
       it("uses context takeover and 11 window bits for inflating incoming messages", function() { with(this) {
         response()
-        expect(zlib, "createInflateRaw").given({windowBits: 11}).exactly(1).returning(inflate)
+        expect(zlib, "createInflateRaw").given({ windowBits: 11 }).exactly(1).returning(inflate)
         processIncomingMessage()
         processIncomingMessage()
       }})
     }})
 
     describe("when the offer has higher client_max_window_bits", function() { with(this) {
-      define("offer", {client_max_window_bits: 12})
+      define("offer", { client_max_window_bits: 12 })
 
       it("includes client_max_window_bits in the response", function() { with(this) {
-        assertEqual( {client_max_window_bits: 11}, response() )
+        assertEqual( { client_max_window_bits: 11 }, response() )
       }})
 
       it("uses context takeover and 11 window bits for inflating incoming messages", function() { with(this) {
         response()
-        expect(zlib, "createInflateRaw").given({windowBits: 11}).exactly(1).returning(inflate)
+        expect(zlib, "createInflateRaw").given({ windowBits: 11 }).exactly(1).returning(inflate)
         processIncomingMessage()
         processIncomingMessage()
       }})
     }})
 
     describe("when the offer has lower client_max_window_bits", function() { with(this) {
-      define("offer", {client_max_window_bits: 10})
+      define("offer", { client_max_window_bits: 10 })
 
       it("includes client_max_window_bits in the response", function() { with(this) {
-        assertEqual( {client_max_window_bits: 10}, response() )
+        assertEqual( { client_max_window_bits: 10 }, response() )
       }})
 
       it("uses context takeover and 10 window bits for inflating incoming messages", function() { with(this) {
         response()
-        expect(zlib, "createInflateRaw").given({windowBits: 10}).exactly(1).returning(inflate)
+        expect(zlib, "createInflateRaw").given({ windowBits: 10 }).exactly(1).returning(inflate)
         processIncomingMessage()
         processIncomingMessage()
       }})
@@ -320,31 +320,31 @@ test.describe("ServerSession", function() { with(this) {
   }})
 
   describe("with level", function() { with(this) {
-    define("options", {level: _zlib.Z_BEST_SPEED})
+    define("options", { level: _zlib.Z_BEST_SPEED })
 
     it("sets the level of the deflate stream", function() { with(this) {
       response()
-      expect(zlib, "createDeflateRaw").given({windowBits: 15, level: _zlib.Z_BEST_SPEED, memLevel: memLevel, strategy: strategy}).returns(deflate)
+      expect(zlib, "createDeflateRaw").given({ windowBits: 15, level: _zlib.Z_BEST_SPEED, memLevel: memLevel, strategy: strategy }).returns(deflate)
       processOutgoingMessage()
     }})
   }})
 
   describe("with memLevel", function() { with(this) {
-    define("options", {memLevel: 5})
+    define("options", { memLevel: 5 })
 
     it("sets the memLevel of the deflate stream", function() { with(this) {
       response()
-      expect(zlib, "createDeflateRaw").given({windowBits: 15, level: _zlib.Z_DEFAULT_LEVEL, memLevel: 5, strategy: strategy}).returns(deflate)
+      expect(zlib, "createDeflateRaw").given({ windowBits: 15, level: _zlib.Z_DEFAULT_LEVEL, memLevel: 5, strategy: strategy }).returns(deflate)
       processOutgoingMessage()
     }})
   }})
 
   describe("with strategy", function() { with(this) {
-    define("options", {strategy: _zlib.Z_FILTERED})
+    define("options", { strategy: _zlib.Z_FILTERED })
 
     it("sets the strategy of the deflate stream", function() { with(this) {
       response()
-      expect(zlib, "createDeflateRaw").given({windowBits: 15, level: _zlib.Z_DEFAULT_LEVEL, memLevel: memLevel, strategy: _zlib.Z_FILTERED}).returns(deflate)
+      expect(zlib, "createDeflateRaw").given({ windowBits: 15, level: _zlib.Z_DEFAULT_LEVEL, memLevel: memLevel, strategy: _zlib.Z_FILTERED }).returns(deflate)
       processOutgoingMessage()
     }})
   }})

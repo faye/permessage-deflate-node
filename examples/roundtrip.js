@@ -22,7 +22,7 @@ function compress(index) {
     return decompress(0);
   }
 
-  var message = {data: new Buffer(record[3], 'base64')};
+  var message = { data: new Buffer(record[3], 'base64') };
   size[0] += message.data.length;
 
   server.processOutgoingMessage(message, function(error, message) {
