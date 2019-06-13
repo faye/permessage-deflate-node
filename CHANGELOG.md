@@ -2,6 +2,7 @@
 
 - Use the `Buffer.alloc()` and `Buffer.from()` functions instead of the unsafe
   `Buffer()` constructor
+- Change license from MIT to Apache 2.0
 
 ### 0.1.6 / 2017-09-10
 
