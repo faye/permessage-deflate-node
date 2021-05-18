@@ -1,4 +1,4 @@
-# permessage-deflate [![Build status](https://secure.travis-ci.org/faye/permessage-deflate-node.svg)](http://travis-ci.org/faye/permessage-deflate-node)
+# permessage-deflate
 
 Implements the
 [permessage-deflate](https://tools.ietf.org/html/draft-ietf-hybi-permessage-compression)
