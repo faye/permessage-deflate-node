@@ -1,3 +1,8 @@
+### 0.2.0 / 2026-11-16
+
+- Implement the `maxLength` option from `websocket-extensions` to limit the size
+  of decompressed messages
+
 ### 0.1.7 / 2019-06-10
 
 - Use the `Buffer.alloc()` and `Buffer.from()` functions instead of the unsafe

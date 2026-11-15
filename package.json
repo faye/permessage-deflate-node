@@ -9,9 +9,9 @@
                     "deflate"
           ],
           "license": "Apache-2.0",
-          "version": "0.1.7",
+          "version": "0.2.0",
           "engines": {
-                    "node": ">=0.8.0"
+                    "node": ">=0.10.0"
           },
           "files": [
                     "lib"
