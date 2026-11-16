@@ -1,7 +1,6 @@
 # permessage-deflate
 
-Implements the
-[permessage-deflate](https://tools.ietf.org/html/draft-ietf-hybi-permessage-compression)
+Implements the [permessage-deflate](https://tools.ietf.org/html/rfc7692)
 WebSocket protocol extension as a plugin for
 [websocket-extensions](https://github.com/faye/websocket-extensions-node).
 
